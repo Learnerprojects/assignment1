@@ -21,8 +21,9 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
 
-public class HelloApplication extends Application {
-
+public class HelloApplication extends Application
+{
+//array of images
     private List<String> imagePaths = List.of(
             "/project/demo2/bmw.jpg",
             "/project/demo2/audi.jpg",
@@ -43,7 +44,8 @@ public class HelloApplication extends Application {
     private double currentRotation = 0; // Track current rotation
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage)
+    {
         primaryStage.setTitle("Rich Internet Image Gallery");
 
         root = new BorderPane();
@@ -56,7 +58,8 @@ public class HelloApplication extends Application {
         gridPane.setAlignment(Pos.CENTER);
 
         int col = 0, row = 0;
-        for (String imagePath : imagePaths) {
+        for (String imagePath : imagePaths)
+        {
             Image image = loadImage(imagePath);
             if (image != null) {
                 ImageView thumbnail = new ImageView(image);
@@ -72,7 +75,9 @@ public class HelloApplication extends Application {
                     col = 0;
                     row++;
                 }
-            } else {
+            }
+            else
+            {
                 System.err.println("Error loading image: " + imagePath);
             }
         }
@@ -109,61 +114,79 @@ public class HelloApplication extends Application {
         primaryStage.show();
     }
 
-    private void showFullImage(String imagePath) {
+    private void showFullImage(String imagePath)
+    {
         currentIndex = imagePaths.indexOf(imagePath);
         Image image = loadImage(imagePath);
-        if (image != null) {
+        if (image != null)
+        {
             fullImageView.setImage(image);
             root.setCenter(fullImageViewContainer);
             String imageName = imagePath.substring(imagePath.lastIndexOf("/") + 1);
             imageLabel.setText(imageName);
             fullImageView.setRotate(currentRotation); // Set current rotation
-        } else {
+        }
+        else
+        {
             System.err.println("Error displaying full image: " + imagePath);
         }
     }
 
-    private void showPreviousImage() {
-        if (currentIndex > 0) {
+    private void showPreviousImage()
+    {
+        if (currentIndex > 0)
+        {
             currentIndex--;
             rotateAndShowImage();
         }
     }
 
-    private void showNextImage() {
-        if (currentIndex < imagePaths.size() - 1) {
+    private void showNextImage()
+    {
+        if (currentIndex < imagePaths.size() - 1)
+        {
             currentIndex++;
             rotateAndShowImage();
         }
     }
 
-    private void rotateAndShowImage() {
+    private void rotateAndShowImage()
+    {
         double newRotation = currentRotation + 360; // Rotate by 360 degrees
         RotateTransition rotateTransition = new RotateTransition(Duration.millis(1000), fullImageView); //Increase duration
         rotateTransition.setFromAngle(currentRotation);
         rotateTransition.setToAngle(newRotation);
-        rotateTransition.setOnFinished(e -> {
+        rotateTransition.setOnFinished(e ->
+        {
             currentRotation = newRotation % 360; // Update currentRotation
             showFullImage(imagePaths.get(currentIndex)); // Show the new image
         });
         rotateTransition.play();
     }
 
-    private Image loadImage(String path) {
-        try (InputStream is = getClass().getResourceAsStream(path)) {
-            if (is != null) {
+    private Image loadImage(String path)
+    {
+        try (InputStream is = getClass().getResourceAsStream(path))
+        {
+            if (is != null)
+            {
                 return new Image(is);
-            } else {
+            }
+            else
+            {
                 System.err.println("Image not found: " + path);
                 return null;
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             System.err.println("Error loading image: " + path + " - " + e.getMessage());
             return null;
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         launch(args);
     }
 }

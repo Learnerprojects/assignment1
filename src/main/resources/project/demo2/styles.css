@@ -1,19 +1,23 @@
-.main-container {
+.main-container
+{
     -fx-background-color: lightgray; /* Light grey background */
 }
 
-.thumbnail {
+.thumbnail
+{
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0.0, 0, 1); /* Add shadow */
     -fx-cursor: hand; /* Change cursor on hover */
 }
 
-.thumbnail:hover {
+.thumbnail:hover
+{
     -fx-scale-x: 1.05; /* Scale up slightly on hover */
     -fx-scale-y: 1.05;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 7, 0.0, 0, 2); /* Stronger shadow on hover */
 }
 
-.navigation-bar {
+.navigation-bar
+{
     -fx-background-color: gainsboro; /* Lighter background for navigation */
     -fx-padding: 10px;
     -fx-spacing: 10px;
